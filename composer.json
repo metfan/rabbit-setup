@@ -12,8 +12,9 @@
     ],
     "autoload": {
         "psr-4": {
-            "": "src/"
-        }
+            "Metfan\\": "src/Metfan/"
+        },
+	"exclude-from-classmap": ["**/Tests/"]
     },
     "require": {
         "php": ">=5.4.0",
