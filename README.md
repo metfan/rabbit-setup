@@ -16,3 +16,11 @@ Commands exposed by Rabbit-setup:
 - [Exchanges, queues deletion](doc/delete_command.md)
 - [Validate expert configuration file](doc/validate_expert_command.md)
 
+Thanks to Olivier about inspiration: https://github.com/odolbeau/rabbit-mq-admin-toolkit
+
+TODO:
+====
+
+- add support of simple configuration file
+- deletion of parameters
+- manage users
