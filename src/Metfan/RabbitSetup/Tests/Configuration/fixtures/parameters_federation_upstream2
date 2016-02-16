@@ -1,0 +1,14 @@
+#test correct federation upstream with wrong value in the message-ttl
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            parameters:
+                federation-upstream:
+                    thor:
+                        uri: "amqp://thor"
+                        message-ttl: none
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidConfigurationException

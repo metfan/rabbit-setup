@@ -1,0 +1,52 @@
+#test correct federation upstream
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            parameters:
+                federation-upstream:
+                    thor:
+                        uri: "amqp://thor"
+                        expires: 300
+                        message-ttl: 10000
+                        max-hops: 10
+                        prefetch-count: 10000
+                        reconnect-delay: 1
+                        ack-mode: on-confirm
+                        trust-user-id: true
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "/" => [
+            "connection" => "default",
+            "parameters" => [
+                "federation-upstream" => [
+                    "thor" => [
+                        "uri" => "amqp://thor",
+                        "expires" => 300,
+                        "message-ttl" => 10000,
+                        "max-hops" => 10,
+                        "prefetch-count" => 10000,
+                        "reconnect-delay" => 1,
+                        "ack-mode" => "on-confirm",
+                        "trust-user-id" => true,
+                    ]
+                ],
+                "federation-upstream-set" => []
+            ],
+            "policies" => [],
+            "exchanges" => [],
+            "queues" => [],            
+        ]
+    ]
+]

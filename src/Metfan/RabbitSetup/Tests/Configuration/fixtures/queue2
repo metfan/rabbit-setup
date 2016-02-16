@@ -1,0 +1,16 @@
+#test queue with exchange from binding not declared
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            exchanges:
+                sign:
+                    type: direct
+            queues:
+                esign_check_1h:
+                    bindings:
+                        - { exchange: esignature, routing_key: esign_check_1h }
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

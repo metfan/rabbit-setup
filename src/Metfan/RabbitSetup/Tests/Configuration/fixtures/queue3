@@ -1,0 +1,18 @@
+#test queue with exchange from arguments.x-dead-letter-exchange not declared
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            exchanges:
+                esignature:
+                    type: direct
+            queues:
+                esign_check_1h:
+                    arguments:
+                        x-message-ttl: 3600000
+                        x-dead-letter-exchange: esignature_dl
+                        x-dead-letter-routing-key: esign_check_status
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

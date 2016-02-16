@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Metfan\RabbitSetup\Command\ConfigExpertCommand;
+use Metfan\RabbitSetup\Command\DeleteCommand;
+use Metfan\RabbitSetup\Command\ValidateExpertCommand;
+use Metfan\RabbitSetup\Container\HttpClientProvider;
+use Metfan\RabbitSetup\Container\RabbitMQManagerProvider;
+use Pimple\Container;
+
+
+define('ROOT_PATH', realpath('.'));
+
+$container = new Container();
+
+/**
+ * defined console logger, depends on OutputInterface from console::execute()
+ * If not defined, return NullLogger to avoid if statement
+ */
+$container['logger'] = function($c) {
+    return new \Psr\Log\NullLogger();
+};
+
+//Configure container
+$container->register(new HttpClientProvider());
+$container->register(new RabbitMQManagerProvider());
+
+
+//create application
+$application = new Application('RabbitMQ setup', '1.0-dev');
+$application->add(new ConfigExpertCommand($container));
+$application->add(new ValidateExpertCommand($container));
+$application->add(new DeleteCommand($container));
+$application->run();

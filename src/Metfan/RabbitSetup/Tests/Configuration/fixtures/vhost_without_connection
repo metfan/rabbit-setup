@@ -1,0 +1,8 @@
+#test vhost with missing connection configuration
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidConfigurationException

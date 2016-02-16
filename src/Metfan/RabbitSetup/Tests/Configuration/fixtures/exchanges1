@@ -1,0 +1,39 @@
+#test correct exchanges definition
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            exchanges:
+                unroutable:
+                    type: fanout
+                    durability: transiant
+                    auto-delete: true
+                    internal: true
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "/" => [
+            "connection" => "default",
+            "exchanges" => [
+                "unroutable" => [
+                    "type" => "fanout",
+                    "durability" => "transiant",
+                    "auto-delete" => true,
+                    "internal" => true
+                ]
+            ],
+            "policies" => [],
+            "queues" => [],
+        ]
+    ]
+]

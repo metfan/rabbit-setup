@@ -1,0 +1,17 @@
+#test policies failed, dead-letter-exchange is not available with apply-to = exchanges
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            policies:
+                FEDEXCHANGE:
+                    pattern: "^mm_*"
+                    apply-to: exchanges
+                    priority: 3
+                    definition:
+                        dead-letter-exchange: "oups"
+
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

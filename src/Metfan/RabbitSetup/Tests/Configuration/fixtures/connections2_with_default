@@ -1,0 +1,27 @@
+#test 2 connections, seconde one with default value
+rabbit_setup:
+    connections:
+        default:
+            user: 'pouette'
+            password: "secretMe!"
+            host: 127.0.0.1
+            port: 15672
+        primary:
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "pouette",
+            "password" => "secretMe!",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ],
+        "primary" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => []
+]

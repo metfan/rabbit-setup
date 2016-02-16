@@ -1,0 +1,15 @@
+#test correct federation upstream set with unknown upstream name
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            parameters:
+                federation-upstream:
+                    thor:
+                        uri: "amqp://thor"
+                federation-upstream-set:
+                    supfed: [{upstream: loki}]
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidConfigurationException

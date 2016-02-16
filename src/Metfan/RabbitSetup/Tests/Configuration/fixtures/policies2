@@ -1,0 +1,61 @@
+#test policies with all definitions usable because of apply-to = all
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            policies:
+                FEDEXCHANGE:
+                    pattern: "^mm_*"
+                    apply-to: all
+                    priority: 3
+                    definition:
+                        message-ttl: 10
+                        expires: 30
+                        max-length: 1024
+                        max-length-bytes: 2048
+                        alternate-exchange: unroutable
+                        dead-letter-exchange: dlx
+                        dead-letter-routing-key: oups
+                        federation-upstream-set: fedset1
+                        federation-upstream: fed2
+
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "/" => [
+            "connection" => "default",
+            "policies" => [
+                "FEDEXCHANGE" => [
+                    "pattern" => "^mm_*",
+                    "apply-to" => "all",
+                    "priority" => 3,
+                    "definition" => [
+                        "message-ttl" => 10,
+                        "expires" => 30,
+                        "max-length" => 1024,
+                        "max-length-bytes" => 2048,
+                        "alternate-exchange" => "unroutable",
+                        "dead-letter-exchange" => "dlx",
+                        "dead-letter-routing-key" => "oups",
+                        "federation-upstream-set" => "fedset1",
+                        "federation-upstream" => "fed2",
+
+
+                    ]
+                ]
+            ],
+            "exchanges" => [],
+            "queues" => [],
+        ]
+    ]
+]

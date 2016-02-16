@@ -1,0 +1,14 @@
+#test correct federation upstream with wrong value in the expire
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            parameters:
+                federation-upstream:
+                    thor:
+                        uri: "amqp://thor"
+                        expires: none
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidConfigurationException

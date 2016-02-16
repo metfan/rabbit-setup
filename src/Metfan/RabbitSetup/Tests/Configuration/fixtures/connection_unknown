@@ -1,0 +1,13 @@
+#test connection in vhost not declared in connections section
+rabbit_setup:
+    connections:
+        default:
+            user: 'pouette'
+            password: "secretMe!"
+            host: 127.0.0.1
+            port: 15672
+    vhosts:
+        "/":
+            connection: defaul
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

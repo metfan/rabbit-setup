@@ -1,0 +1,17 @@
+#test policies failed, max-length is not available with apply-to = exchanges
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            policies:
+                FEDEXCHANGE:
+                    pattern: "^mm_*"
+                    apply-to: exchanges
+                    priority: 3
+                    definition:
+                        max-length: 10
+
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

@@ -1,0 +1,17 @@
+#test policies failed, alternate-exchange is not available with apply-to = queues
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            policies:
+                FEDEXCHANGE:
+                    pattern: "^mm_*"
+                    apply-to: queues
+                    priority: 3
+                    definition:
+                        alternate-exchange: "oups"
+
+--EXPECT--
+Symfony\Component\Config\Definition\Exception\InvalidTypeException

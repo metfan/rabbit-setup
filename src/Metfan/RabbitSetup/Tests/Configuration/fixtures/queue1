@@ -1,0 +1,67 @@
+#test correct queues definition
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            exchanges:
+                esignature:
+                    type: direct
+                esignature_dl:
+                    type: direct
+            queues:
+                esign_check_1h:
+                    arguments:
+                        x-message-ttl: 3600000
+                        x-dead-letter-exchange: esignature_dl
+                        x-dead-letter-routing-key: esign_check_status
+                    bindings:
+                        - { exchange: esignature, routing_key: esign_check_1h }
+                        - { exchange: esignature, routing_key: esign_check_30m }
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "/" => [
+            "connection" => "default",
+            "exchanges" => [
+                "esignature" => [
+                    "type" => "direct",
+                    "durability" => "durable",
+                    "auto-delete" => false,
+                    "internal" => false
+                ],
+                "esignature_dl" => [
+                    "type" => "direct",
+                    "durability" => "durable",
+                    "auto-delete" => false,
+                    "internal" => false
+                ]
+            ],
+            "policies" => [],
+            "queues" => [
+                "esign_check_1h" => [
+                    "arguments" => [
+                        "x-message-ttl" => "3600000",
+                        "x-dead-letter-exchange" => "esignature_dl",
+                        "x-dead-letter-routing-key" => "esign_check_status",
+                    ],
+                    "bindings" => [
+                        ["exchange" => "esignature", "routing_key" => "esign_check_1h"],
+                        ["exchange" => "esignature", "routing_key" => "esign_check_30m"],
+                    ],
+                    "durability" => "durable",
+                    "auto-delete" => false,
+                ]
+            ],
+        ]
+    ]
+]

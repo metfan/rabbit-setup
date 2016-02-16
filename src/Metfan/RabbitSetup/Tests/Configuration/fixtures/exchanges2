@@ -1,0 +1,47 @@
+#test exchages with default
+rabbit_setup:
+    connections:
+        default:
+    vhosts:
+        "/":
+            connection: default
+            exchanges:
+                unroutable:
+                    type: fanout
+                    durability: transiant
+                    auto-delete: true
+                    internal: true
+                mail:
+                    type: direct
+--EXPECT--
+[
+    "connections" => [
+        "default" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "/" => [
+            "connection" => "default",
+            "exchanges" => [
+                "unroutable" => [
+                    "type" => "fanout",
+                    "durability" => "transiant",
+                    "auto-delete" => true,
+                    "internal" => true
+                ],
+                "mail" => [
+                    "type" => "direct",
+                    "durability" => "durable",
+                    "auto-delete" => false,
+                    "internal" => false
+                ]
+            ],
+            "policies" => [],
+            "queues" => [],
+        ]
+    ]
+]
