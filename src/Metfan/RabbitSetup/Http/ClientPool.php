@@ -38,11 +38,11 @@ class ClientPool
     }
 
     /**
-     * @param mixed $connections
+     * @param array $connections
      * @return $this
      *
      */
-    public function setConnections($connections)
+    public function setConnections(array $connections)
     {
         $this->connections = $connections;
 
