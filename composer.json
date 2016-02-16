@@ -1,7 +1,15 @@
 {
     "name": "metfan/rabbit-setup",
-    "license": "proprietary",
+    "license": "MIT",
     "type": "project",
+    "description": "Tools to ease creation of exchanges, queues, parameters on rabbitMQ",
+    "keywords": ["rabbitmq", "api", "setup"],
+    "authors": [
+        {
+            "name": "Ulrich",
+            "email": "l_ulrich2002@yahoo.fr"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "": "src/"
