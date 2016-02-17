@@ -1,6 +1,10 @@
 Rabbit-setup
 ------------
 
+[![Build Status](https://travis-ci.org/metfan/rabbit-setup.svg?branch=master)](https://travis-ci.org/metfan/rabbit-setup)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3cae648a-a1c0-4538-b61e-4a8a8fcd564d/mini.png)](https://insight.sensiolabs.com/projects/3cae648a-a1c0-4538-b61e-4a8a8fcd564d)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/metfan/rabbit-setup/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/metfan/rabbit-setup/?branch=master)
+
 Rabbit-setup is a command line tool to ease management of vhosts, exchanges, queues and bindings into RabbitMQ instance via the RabbitMQ's API.
 The best way to use rabbit-setup is using phar file.
 
