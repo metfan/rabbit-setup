@@ -114,7 +114,7 @@ class VhostManager
         }
     }
 
-    private function process($manager, $client, $vhostName, $elements)
+    private function process(RabbitMQManagerInterface $manager, ClientInterface $client, $vhostName, $elements)
     {
         $manager
             ->setClient($client)
