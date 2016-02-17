@@ -55,12 +55,7 @@ class QueueManager extends BaseManager
      */
     public function getAll($vhost = null)
     {
-        $url = '/api/queues';
-        if ($vhost) {
-            $url = sprintf('%s/%s', $url, $vhost);
-        }
-
-        return json_decode($this->client->query(ClientInterface::METHOD_GET, $url), true);
+        return $this->findAllElements('/api/queues', $vhost);
     }
 
     /**
@@ -72,11 +67,6 @@ class QueueManager extends BaseManager
      */
     public function delete($vhost, $name)
     {
-        $response = $this->client->query(ClientInterface::METHOD_DELETE, sprintf('/api/queues/%s/%s', $vhost, $name));
-
-        $this->logger->info(
-            sprintf('Delete queue <info>%s</info> from vhost <info>%s</info>', $name, urldecode($vhost)));
-
-        return $response;
+        return $this->deleteElement('/api/queues', $vhost, $name, 'queue');
     }
 }

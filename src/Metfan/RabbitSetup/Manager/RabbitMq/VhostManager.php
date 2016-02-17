@@ -87,6 +87,7 @@ class VhostManager
 
         //process parameters
         if (isset($configuration['parameters']) && count($configuration['parameters'])) {
+
             $this->parameterManager
                 ->setClient($client)
                 ->setVhost($vhostName);
@@ -99,32 +100,27 @@ class VhostManager
 
         //process exchanges
         if (isset($configuration['exchanges']) && count($configuration['exchanges'])) {
-            $this->exchangeManager
-                ->setClient($client)
-                ->setVhost($vhostName);
-            foreach ($configuration['exchanges'] as $exchangeName => $exchangeOptions) {
-                $this->exchangeManager->create($exchangeName, $exchangeOptions);
-            }
+            $this->process($this->exchangeManager, $client, $vhostName, $configuration['exchanges']);
         }
 
         //process queues
         if (isset($configuration['queues']) && count($configuration['queues'])) {
-            $this->queueManager
-                ->setClient($client)
-                ->setVhost($vhostName);
-            foreach ($configuration['queues'] as $queueName => $queueOptions) {
-                $this->queueManager->create($queueName, $queueOptions);
-            }
+            $this->process($this->queueManager, $client, $vhostName, $configuration['queues']);
         }
 
         //process policies
         if (isset($configuration['policies']) && count($configuration['policies'])) {
-            $this->policyManager
-                ->setClient($client)
-                ->setVhost($vhostName);
-            foreach ($configuration['policies'] as $policyName => $policyOptions) {
-                $this->policyManager->create($policyName, $policyOptions);
-            }
+            $this->process($this->policyManager, $client, $vhostName, $configuration['policies']);
+        }
+    }
+
+    private function process($manager, $client, $vhostName, $elements)
+    {
+        $manager
+            ->setClient($client)
+            ->setVhost($vhostName);
+        foreach ($elements as $name => $element) {
+            $manager->create($name, $element);
         }
     }
 }

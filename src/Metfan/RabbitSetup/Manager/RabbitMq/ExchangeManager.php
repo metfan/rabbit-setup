@@ -39,12 +39,7 @@ class ExchangeManager extends BaseManager
      */
     public function getAll($vhost = null)
     {
-        $url = '/api/exchanges';
-        if ($vhost) {
-            $url = sprintf('%s/%s', $url, $vhost);
-        }
-
-        return json_decode($this->client->query(ClientInterface::METHOD_GET, $url), true);
+        return $this->findAllElements('/api/exchanges', $vhost);
     }
 
     /**
@@ -56,11 +51,6 @@ class ExchangeManager extends BaseManager
      */
     public function delete($vhost, $name)
     {
-        $response = $this->client->query(ClientInterface::METHOD_DELETE, sprintf('/api/exchanges/%s/%s', $vhost, $name));
-
-        $this->logger->info(
-            sprintf('Delete exchange <info>%s</info> from vhost <info>%s</info>', $name, urldecode($vhost)));
-
-        return $response;
+        return $this->deleteElement('/api/exchanges', $vhost, $name, 'exchange');
     }
 }
