@@ -10,7 +10,7 @@ The best way to use rabbit-setup is using phar file.
 
 Use this commande line to compile phar of the project:
 
-    php -d phar.readonly=off ./phar-composer.phar build ./rabbitAdmin/
+    php -d phar.readonly=off ./phar-composer.phar build https://github.com/metfan/rabbit-setup.git
     
 phar-composer can be found here: https://github.com/clue/phar-composer#as-a-phar-recommended
 
