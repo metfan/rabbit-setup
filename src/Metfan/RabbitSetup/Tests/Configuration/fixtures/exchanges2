@@ -8,7 +8,7 @@ rabbit_setup:
             exchanges:
                 unroutable:
                     type: fanout
-                    durability: transiant
+                    durable: false
                     auto-delete: true
                     internal: true
                 mail:
@@ -29,13 +29,13 @@ rabbit_setup:
             "exchanges" => [
                 "unroutable" => [
                     "type" => "fanout",
-                    "durability" => "transiant",
+                    "durable" => false,
                     "auto-delete" => true,
                     "internal" => true
                 ],
                 "mail" => [
                     "type" => "direct",
-                    "durability" => "durable",
+                    "durable" => true,
                     "auto-delete" => false,
                     "internal" => false
                 ]

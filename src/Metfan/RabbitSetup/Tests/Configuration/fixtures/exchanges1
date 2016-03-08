@@ -8,7 +8,6 @@ rabbit_setup:
             exchanges:
                 unroutable:
                     type: fanout
-                    durability: transiant
                     auto-delete: true
                     internal: true
 --EXPECT--
@@ -27,7 +26,7 @@ rabbit_setup:
             "exchanges" => [
                 "unroutable" => [
                     "type" => "fanout",
-                    "durability" => "transiant",
+                    "durable" => true,
                     "auto-delete" => true,
                     "internal" => true
                 ]
