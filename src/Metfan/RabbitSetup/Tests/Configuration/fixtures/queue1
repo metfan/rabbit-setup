@@ -35,13 +35,13 @@ rabbit_setup:
             "exchanges" => [
                 "esignature" => [
                     "type" => "direct",
-                    "durability" => "durable",
+                    "durable" => true,
                     "auto-delete" => false,
                     "internal" => false
                 ],
                 "esignature_dl" => [
                     "type" => "direct",
-                    "durability" => "durable",
+                    "durable" => true,
                     "auto-delete" => false,
                     "internal" => false
                 ]
