@@ -337,9 +337,8 @@ class ConfigExpertConfiguration implements ConfigurationInterface
             ->prototype('array')
                 ->normalizeKeys(false) # don't transforme - into _
                 ->children()
-                    ->enumNode('durability')
-                        ->values(['durable', 'transiant'])
-                        ->defaultValue('durable')
+                    ->booleanNode('durable')
+                        ->defaultValue(true)
                     ->end()
                     ->booleanNode('auto-delete')
                         ->defaultValue(false)

@@ -58,7 +58,7 @@ rabbit_setup:
                         ["exchange" => "esignature", "routing_key" => "esign_check_1h"],
                         ["exchange" => "esignature", "routing_key" => "esign_check_30m"],
                     ],
-                    "durability" => "durable",
+                    "durable" => true,
                     "auto-delete" => false,
                 ]
             ],
