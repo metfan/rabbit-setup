@@ -38,7 +38,7 @@ rabbit_setup:
             policies:
                 name:
                     pattern: ~
-                    apply_to: ~ #exchanges|queues|all
+                    apply-to: ~ #exchanges|queues|all
                     priority: ~
                     definition:
                         ha-mode: ~
