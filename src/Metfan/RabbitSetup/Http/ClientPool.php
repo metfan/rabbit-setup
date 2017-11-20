@@ -27,6 +27,10 @@ class ClientPool
      */
     private $connections;
 
+    private $host;
+
+    private $port;
+
     private $user;
 
     private $password;
@@ -45,6 +49,28 @@ class ClientPool
     public function setConnections(array $connections)
     {
         $this->connections = $connections;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $host
+     * @return $this
+     */
+    public function overrideHost($host)
+    {
+        $this->host = $host;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $port
+     * @return $this
+     */
+    public function overridePort($port)
+    {
+        $this->port = $port;
 
         return $this;
     }
@@ -95,6 +121,14 @@ class ClientPool
     {
         if (!array_key_exists($name, $this->connections)) {
             throw new \OutOfRangeException(sprintf('Expected connection %s doesn\'t exists', $name));
+        }
+
+        if (null !== $this->host) {
+            $this->connections[$name]['host'] = $this->host;
+        }
+
+        if (null !== $this->port) {
+            $this->connections[$name]['port'] = (int) $this->port;
         }
 
         if (null !== $this->user) {
