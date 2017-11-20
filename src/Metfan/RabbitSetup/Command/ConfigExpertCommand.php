@@ -37,6 +37,8 @@ class ConfigExpertCommand extends Command
             ->setName('rsetup:config:expert')
             ->setDescription('Apply configuration file to RabbitMQ')
             ->addArgument('configFile', InputArgument::REQUIRED, 'Configuration file')
+            ->addOption('host', 'h', InputOption::VALUE_REQUIRED, 'Override host config', null)
+            ->addOption('port', null, InputOption::VALUE_REQUIRED, 'Override port config', null)
             ->addOption('user', 'u', InputOption::VALUE_REQUIRED, 'Override user config', null)
             ->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Override password config', null);
     }
@@ -45,6 +47,8 @@ class ConfigExpertCommand extends Command
     {
         $this->container->register(new LoggerProvider($output));
         $this->container['http_client_pool']
+            ->overrideHost($input->getOption('host'))
+            ->overridePort($input->getOption('port'))
             ->overrideUser($input->getOption('user'))
             ->overridePassword($input->getOption('password'));
 

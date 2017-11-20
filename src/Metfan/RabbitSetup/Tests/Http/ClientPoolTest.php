@@ -55,8 +55,8 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('createClient')
             ->with([
-                'host' => '127.0.0.1',
-                'port' => 15672,
+                'host' => 'newHost',
+                'port' => 33,
                 'user' => 'newUser',
                 'password' => 'newPassword',
             ])
@@ -69,6 +69,8 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
             'password' => 'guest',
         ]]));
 
+        $this->assertEquals($pool, $pool->overrideHost('newHost'));
+        $this->assertEquals($pool, $pool->overridePort(33));
         $this->assertEquals($pool, $pool->overrideUser('newUser'));
         $this->assertEquals($pool, $pool->overridePassword('newPassword'));
         $pool->getClientByName('ulrich');
