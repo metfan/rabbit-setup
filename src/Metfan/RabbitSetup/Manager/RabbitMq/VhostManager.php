@@ -85,6 +85,20 @@ class VhostManager
             []);
         $this->logger->info(sprintf('Create vhost: <info>%s</info>', urldecode($vhostName)));
 
+        //add permissions of connection user to vhost
+        $user = $this->clientPool->getUserByConnectionName($configuration['connection']);
+        $client->query(
+            ClientInterface::METHOD_PUT,
+            sprintf('/api/permissions/%s/%s', $vhostName, urlencode($user)),
+            ["configure" => ".*", "write" => ".*", "read" => ".*"]);
+        $this->logger->info(
+            sprintf(
+                'Add permissions to vhost: <info>%s</info> for user: <info>%s</info>',
+                urldecode($vhostName),
+                $user
+            )
+        );
+
         //process parameters
         if (isset($configuration['parameters']) && count($configuration['parameters'])) {
 

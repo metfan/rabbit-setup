@@ -113,6 +113,21 @@ class ClientPool
     }
 
     /**
+     * Return username from a connection
+     *
+     * @param $connectionName
+     * @return mixed
+     */
+    public function getUserByConnectionName($connectionName)
+    {
+        if (!array_key_exists($connectionName, $this->connections)) {
+            throw new \OutOfRangeException(sprintf('Expected connection %s doesn\'t exists', $connectionName));
+        }
+
+        return $this->connections[$connectionName]['user'];
+    }
+
+    /**
      * create a client
      *
      * @param $name
