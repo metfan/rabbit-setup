@@ -63,14 +63,19 @@ class ConfigExpertCommandTest extends \PHPUnit_Framework_TestCase
     public function testBasic()
     {
         $this->client
-            ->expects($this->once())
+            ->expects($this->at(0))
             ->method('query')
             ->with('PUT', '/api/vhosts/%2F', []);
+
+        $this->client
+            ->expects($this->at(1))
+            ->method('query')
+            ->with('PUT', '/api/permissions/%2F/guest', ["configure" => ".*", "write" => ".*", "read" => ".*"]);
 
         $tester = new CommandTester($this->command);
         $tester->execute(['configFile' => 'Parser/fixture/config.yml']);
 
-        $this->assertEquals("<>[info] Create vhost: /\n", $tester->getDisplay(true));
+        $this->assertEquals("<>[info] Create vhost: /\n<>[info] Add permissions to vhost: / for user: guest\n", $tester->getDisplay(true));
         $this->assertEquals(0, $tester->getStatusCode());
     }
 }

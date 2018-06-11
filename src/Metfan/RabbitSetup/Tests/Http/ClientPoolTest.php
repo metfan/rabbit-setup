@@ -1,5 +1,6 @@
 <?php
 namespace Metfan\RabbitSetup\Tests\Http;
+
 use Metfan\RabbitSetup\Http\ClientPool;
 
 
@@ -42,9 +43,8 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
             ->willReturn('client1');
 
         $pool->setConnections(['ulrich' => ['info']]);
-        $client1 = $pool->getClientByName('ulrich');
 
-        $this->assertEquals($client1, $pool->getClientByName('ulrich'));
+        $this->assertEquals('client1', $pool->getClientByName('ulrich'));
     }
 
     public function testOverride()
@@ -74,5 +74,22 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($pool, $pool->overrideUser('newUser'));
         $this->assertEquals($pool, $pool->overridePassword('newPassword'));
         $pool->getClientByName('ulrich');
+    }
+
+    public function testGetUserByConnectionNameFailed()
+    {
+        $pool = new ClientPool($this->factory);
+
+        $this->setExpectedException('\OutOfRangeException');
+        $pool->getUserByConnectionName('ulrich');
+    }
+
+    public function testGetUserByConnectionName()
+    {
+        $pool = new ClientPool($this->factory);
+
+        $pool->setConnections(['ulrich' => ['user' => 'guest']]);
+
+        $this->assertEquals('guest', $pool->getUserByConnectionName('ulrich'));
     }
 }

@@ -76,7 +76,7 @@ class VhostManagerTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->client);
 
         $this->client
-            ->expects($this->once())
+            ->expects($this->at(0))
             ->method('query')
             ->with(
                 ClientInterface::METHOD_PUT,
@@ -85,9 +85,28 @@ class VhostManagerTest extends \PHPUnit_Framework_TestCase
             );
 
         $this->logger
-            ->expects($this->once())
+            ->expects($this->at(0))
             ->method('info')
             ->with('Create vhost: <info>/</info>');
+
+        $this->clientPool
+            ->expects($this->once())
+            ->method('getUserByConnectionName')
+            ->willReturn('guest');
+
+        $this->client
+            ->expects($this->at(1))
+            ->method('query')
+            ->with(
+                ClientInterface::METHOD_PUT,
+                '/api/permissions/%2F/guest',
+                ["configure" => ".*", "write" => ".*", "read" => ".*"]
+            );
+
+        $this->logger
+            ->expects($this->at(1))
+            ->method('info')
+            ->with('Add permissions to vhost: <info>/</info> for user: <info>guest</info>');
 
         return $manager;
     }
