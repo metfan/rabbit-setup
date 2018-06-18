@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Container;
 
 use Metfan\RabbitSetup\Container\HttpClientProvider;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 
 
@@ -11,7 +12,7 @@ use Pimple\Container;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Container
  */
-class HttpClientProviderTest extends \PHPUnit_Framework_TestCase
+class HttpClientProviderTest extends TestCase
 {
     public function test()
     {

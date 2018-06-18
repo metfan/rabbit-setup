@@ -2,6 +2,8 @@
 namespace Metfan\RabbitSetup\Tests\Http;
 
 use Metfan\RabbitSetup\Http\ClientPool;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 
 /**
@@ -10,10 +12,10 @@ use Metfan\RabbitSetup\Http\ClientPool;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Http
  */
-class ClientPoolTest extends \PHPUnit_Framework_TestCase
+class ClientPoolTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $factory;
 
@@ -21,14 +23,14 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->factory = $this->getMock('Metfan\RabbitSetup\Factory\CurlClientFactory');
+        $this->factory = $this->getMockBuilder('Metfan\RabbitSetup\Factory\CurlClientFactory')->getMock();
     }
 
     public function testUnknownName()
     {
         $pool = new ClientPool($this->factory);
 
-        $this->setExpectedException('\OutOfRangeException');
+        $this->expectException('\OutOfRangeException');
         $pool->getClientByName('ulrich');
     }
 
@@ -80,7 +82,7 @@ class ClientPoolTest extends \PHPUnit_Framework_TestCase
     {
         $pool = new ClientPool($this->factory);
 
-        $this->setExpectedException('\OutOfRangeException');
+        $this->expectException('\OutOfRangeException');
         $pool->getUserByConnectionName('ulrich');
     }
 

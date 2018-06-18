@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Manager\Command;
 
 use Metfan\RabbitSetup\Manager\Command\DeleteManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\Command\DeleteManager
@@ -9,7 +10,7 @@ use Metfan\RabbitSetup\Manager\Command\DeleteManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\Command
  */
-class DeleteManagerTest extends \PHPUnit_Framework_TestCase
+class DeleteManagerTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -35,17 +36,17 @@ class DeleteManagerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->exchangeManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager');
-        $this->queueManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\QueueManager');
-        $this->policyManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager');
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
+        $this->exchangeManager = $this->getMockBuilder('Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager')->getMock();
+        $this->queueManager = $this->getMockBuilder('Metfan\RabbitSetup\Manager\RabbitMq\QueueManager')->getMock();
+        $this->policyManager = $this->getMockBuilder('Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager')->getMock();
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
     }
 
     public function testDeleteQueueMissingVhost()
     {
         $manager = new DeleteManager($this->exchangeManager, $this->queueManager, $this->policyManager, $this->logger);
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $manager->deleteQueues(null, 'test');
     }
 
@@ -88,7 +89,7 @@ class DeleteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $manager = new DeleteManager($this->exchangeManager, $this->queueManager, $this->policyManager, $this->logger);
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $manager->deleteExchanges(null, 'test');
     }
 
@@ -150,7 +151,7 @@ class DeleteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $manager = new DeleteManager($this->exchangeManager, $this->queueManager, $this->policyManager, $this->logger);
 
-        $this->setExpectedException('\InvalidArgumentException');
+        $this->expectException('\InvalidArgumentException');
         $manager->deletePolicies(null, 'test');
     }
 
