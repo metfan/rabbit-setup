@@ -303,6 +303,7 @@ class ConfigExpertConfiguration implements ConfigurationInterface
 
         $node
             ->useAttributeAsKey('name')
+            ->normalizeKeys(false) # don't transforme - into _
             ->prototype('array')
                 ->normalizeKeys(false) # don't transforme - into _
                 ->children()
@@ -334,6 +335,7 @@ class ConfigExpertConfiguration implements ConfigurationInterface
 
         $node
             ->useAttributeAsKey('name')
+            ->normalizeKeys(false) # don't transforme - into _
             ->prototype('array')
                 ->normalizeKeys(false) # don't transforme - into _
                 ->children()

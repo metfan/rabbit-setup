@@ -1,0 +1,63 @@
+#test vhost, exchange, queue name and routing key with '-' and not '_'
+rabbit_setup:
+    connections:
+        local:
+
+    vhosts:
+        "ms-order.exemple.com": #vhost name
+            connection: local
+            exchanges:
+                order-type:
+                    type: topic
+                    durable: true
+            queues:
+                "catalog-stock.order":
+                    bindings:
+                        - { exchange: 'order-type', routing_key: 'order.create' }
+                        - { exchange: 'order-type', routing_key: 'order.update' }
+                "catalog-stock.order_error":
+                    auto-delete: false
+                    bindings:
+                        - { exchange: 'order-type', routing_key: 'catalog-stock.order_error' }
+--EXPECT--
+[
+    "connections" => [
+        "local" => [
+            "user" => "guest",
+            "password" => "guest",
+            "host" => "127.0.0.1",
+            "port" => 15672,
+        ]
+    ],
+    "vhosts" => [
+        "ms-order.exemple.com" => [
+            "connection" => "local",
+            "exchanges" => [
+                "order-type" => [
+                    "type" => "topic",
+                    "durable" => true,
+                    "auto-delete" => false,
+                    "internal" => false
+                ]
+            ],
+            "policies" => [],
+            "queues" => [
+                "catalog-stock.order" => [
+                    "bindings" => [
+                        ["exchange" => "order-type", "routing_key" => "order.create"],
+                        ["exchange" => "order-type", "routing_key" => "order.update"],
+                    ],
+                    "durable" => true,
+                    "auto-delete" => false,
+                ],
+                "catalog-stock.order_error" => [
+                    "bindings" => [
+                        ["exchange" => "order-type", "routing_key" => "catalog-stock.order_error"],
+                    ],
+                    "durable" => true,
+                    "auto-delete" => false,
+                ]
+            ],
+        ]
+    ]
+]
