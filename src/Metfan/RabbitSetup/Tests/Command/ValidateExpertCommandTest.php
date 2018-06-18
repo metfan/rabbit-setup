@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Command;
 
 use Metfan\RabbitSetup\Command\ValidateExpertCommand;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Command
  */
-class ValidateExpertCommandTest extends \PHPUnit_Framework_TestCase
+class ValidateExpertCommandTest extends TestCase
 {
     public function test()
     {

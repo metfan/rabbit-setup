@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Factory;
 
 use Metfan\RabbitSetup\Factory\CurlClientFactory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test of Metfan\RabbitSetup\Factory\CurlClientFactory
@@ -9,7 +10,7 @@ use Metfan\RabbitSetup\Factory\CurlClientFactory;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Factory
  */
-class CurlClientFactoryTest extends \PHPUnit_Framework_TestCase
+class CurlClientFactoryTest extends TestCase
 {
     public function test()
     {

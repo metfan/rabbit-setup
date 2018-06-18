@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Manager\Command;
 
 use Metfan\RabbitSetup\Manager\Command\ConfigExpertManager;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\Command\ConfigExpertManager
@@ -9,7 +10,7 @@ use Metfan\RabbitSetup\Manager\Command\ConfigExpertManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\Command
  */
-class ConfigExpertManagerTest extends \PHPUnit_Framework_TestCase
+class ConfigExpertManagerTest extends TestCase
 {
     public function test()
     {

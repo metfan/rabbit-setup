@@ -3,6 +3,8 @@ namespace Metfan\RabbitSetup\Tests\Manager\RabbitMq;
 
 use Metfan\RabbitSetup\Http\ClientInterface;
 use Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager
@@ -10,15 +12,15 @@ use Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\RabbitMq
  */
-class ExchangeManagerTest extends \PHPUnit_Framework_TestCase
+class ExchangeManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $client;
 
@@ -26,8 +28,8 @@ class ExchangeManagerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->client = $this->getMock('Metfan\RabbitSetup\Http\ClientInterface');
+        $this->logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $this->client = $this->getMockBuilder('Metfan\RabbitSetup\Http\ClientInterface')->getMock();
     }
 
 
