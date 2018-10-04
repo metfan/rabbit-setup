@@ -8,7 +8,7 @@ Rabbit-setup
 Rabbit-setup is a command line tool to ease management of vhosts, exchanges, queues and bindings into RabbitMQ instance via the RabbitMQ's API.
 The best way to use rabbit-setup is using phar file.
 
-Use this commande line to compile phar of the project:
+Use this commande line to compile phar of the project or download from [release page](https://github.com/metfan/rabbit-setup/releases)
 
     php -d phar.readonly=off ./phar-composer.phar build https://github.com/metfan/rabbit-setup.git
     
