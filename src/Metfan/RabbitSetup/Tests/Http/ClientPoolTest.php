@@ -1,10 +1,7 @@
 <?php
 namespace Metfan\RabbitSetup\Tests\Http;
-<<<<<<< HEAD
 
-=======
 use Metfan\RabbitSetup\Factory\CurlClientFactory;
->>>>>>> fix test with new phpunit api
 use Metfan\RabbitSetup\Http\ClientPool;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -86,7 +83,7 @@ class ClientPoolTest extends TestCase
     {
         $pool = new ClientPool($this->factory);
 
-        $this->setExpectedException('\OutOfRangeException');
+        $this->expectException('\OutOfRangeException');
         $pool->getUserByConnectionName('ulrich');
     }
 
