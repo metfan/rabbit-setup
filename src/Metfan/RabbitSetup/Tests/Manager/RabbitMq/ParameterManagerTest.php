@@ -3,6 +3,10 @@ namespace Metfan\RabbitSetup\Tests\Manager\RabbitMq;
 
 use Metfan\RabbitSetup\Http\ClientInterface;
 use Metfan\RabbitSetup\Manager\RabbitMq\ParameterManager;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\RabbitMq\ParameterManager
@@ -10,15 +14,15 @@ use Metfan\RabbitSetup\Manager\RabbitMq\ParameterManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\RabbitMq
  */
-class ParameterManagerTest extends \PHPUnit_Framework_TestCase
+class ParameterManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $client;
 
@@ -26,8 +30,8 @@ class ParameterManagerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->client = $this->getMock('Metfan\RabbitSetup\Http\ClientInterface');
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)->getMock();
+        $this->client = $this->getMockBuilder(ClientInterface::class)->getMock();
     }
 
 
@@ -46,7 +50,7 @@ class ParameterManagerTest extends \PHPUnit_Framework_TestCase
     public function testCreate($paramType)
     {
         $manager = new ParameterManager();
-        $this->assertAttributeInstanceOf('Psr\Log\NullLogger', 'logger', $manager);
+        $this->assertAttributeInstanceOf(NullLogger::class, 'logger', $manager);
 
         $manager->setLogger($this->logger);
         $manager->setClient($this->client);
@@ -72,7 +76,7 @@ class ParameterManagerTest extends \PHPUnit_Framework_TestCase
     public function testCreateUnsupportedType()
     {
         $manager = new ParameterManager();
-        $this->assertAttributeInstanceOf('Psr\Log\NullLogger', 'logger', $manager);
+        $this->assertAttributeInstanceOf(NullLogger::class, 'logger', $manager);
 
         $manager->setLogger($this->logger);
 

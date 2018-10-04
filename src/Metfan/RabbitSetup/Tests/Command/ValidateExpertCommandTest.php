@@ -2,7 +2,9 @@
 namespace Metfan\RabbitSetup\Tests\Command;
 
 use Metfan\RabbitSetup\Command\ValidateExpertCommand;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Tester\CommandTester;
 
 
@@ -12,7 +14,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Command
  */
-class ValidateExpertCommandTest extends \PHPUnit_Framework_TestCase
+class ValidateExpertCommandTest extends TestCase
 {
     public function test()
     {
@@ -27,6 +29,6 @@ class ValidateExpertCommandTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals("<>[info] File don't show errors.\n", $tester->getDisplay(true));
 
-        $this->assertInstanceOf('Symfony\Component\Console\Logger\ConsoleLogger', $container['logger']);
+        $this->assertInstanceOf(ConsoleLogger::class, $container['logger']);
     }
 }

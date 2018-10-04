@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Parser;
 
 use Metfan\RabbitSetup\Parser\ParseExpertConfig;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Unit test of Metfan\RabbitSetup\Parser\ParseExpertConfig
@@ -9,7 +10,7 @@ use Metfan\RabbitSetup\Parser\ParseExpertConfig;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Parser
  */
-class ParseExpertConfigTest extends \PHPUnit_Framework_TestCase
+class ParseExpertConfigTest extends TestCase
 {
     public function provider()
     {
@@ -35,7 +36,7 @@ class ParseExpertConfigTest extends \PHPUnit_Framework_TestCase
         $parser = new ParseExpertConfig();
 
         if (null !== $exception) {
-            $this->setExpectedException($exception);
+            $this->expectException($exception);
         }
 
         $this->assertInternalType('array', $parser->parse($filePath));

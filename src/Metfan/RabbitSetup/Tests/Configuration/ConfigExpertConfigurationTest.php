@@ -2,6 +2,7 @@
 namespace Metfan\RabbitSetup\Tests\Configuration;
 
 use Metfan\RabbitSetup\Configuration\ConfigExpertConfiguration;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
@@ -13,7 +14,7 @@ use Symfony\Component\Yaml\Yaml;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Configuration
  */
-class ConfigExpertConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigExpertConfigurationTest extends TestCase
 {
     public function provider()
     {
@@ -36,7 +37,7 @@ class ConfigExpertConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $data = $this->parseFixture($file);
         if (null !== $data['exception']) {
-            $this->setExpectedException($data['exception']);
+            $this->expectException($data['exception']);
         }
 
         $yaml = Yaml::parse($data['yaml']);

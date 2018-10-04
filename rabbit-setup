@@ -30,7 +30,7 @@ $container->register(new RabbitMQManagerProvider());
 
 
 //create application
-$application = new Application('RabbitMQ setup', '1.0-dev');
+$application = new Application('RabbitMQ setup', '2.0-dev');
 $application->add(new ConfigExpertCommand($container));
 $application->add(new ValidateExpertCommand($container));
 $application->add(new DeleteCommand($container));
