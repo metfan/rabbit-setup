@@ -2,8 +2,11 @@
 namespace Metfan\RabbitSetup\Tests\Command;
 
 use Metfan\RabbitSetup\Command\ConfigExpertCommand;
+use Metfan\RabbitSetup\Command\DeleteCommand;
 use Metfan\RabbitSetup\Container\HttpClientProvider;
 use Metfan\RabbitSetup\Container\RabbitMQManagerProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -14,7 +17,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Command
  */
-class ConfigExpertCommandTest extends \PHPUnit_Framework_TestCase
+class ConfigExpertCommandTest extends TestCase
 {
     /**
      * @var DeleteCommand
@@ -22,7 +25,7 @@ class ConfigExpertCommandTest extends \PHPUnit_Framework_TestCase
     private $command;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $client;
 
@@ -33,7 +36,7 @@ class ConfigExpertCommandTest extends \PHPUnit_Framework_TestCase
         $this->client = $this->getMockBuilder('Metfan\RabbitSetup\Http\CurlClient')
             ->disableOriginalConstructor()
             ->getMock();
-        $clientFactory = $this->getMock('Metfan\RabbitSetup\Factory\CurlClientFactory');
+        $clientFactory = $this->getMockBuilder('Metfan\RabbitSetup\Factory\CurlClientFactory')->getMock();
 
         $clientFactory
             ->expects($this->any())

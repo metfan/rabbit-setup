@@ -3,6 +3,10 @@ namespace Metfan\RabbitSetup\Tests\Manager\RabbitMq;
 
 use Metfan\RabbitSetup\Http\ClientInterface;
 use Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager
@@ -10,15 +14,15 @@ use Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\RabbitMq
  */
-class PolicyManagerTest extends \PHPUnit_Framework_TestCase
+class PolicyManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $client;
 
@@ -26,14 +30,14 @@ class PolicyManagerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->client = $this->getMock('Metfan\RabbitSetup\Http\ClientInterface');
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)->getMock();
+        $this->client = $this->getMockBuilder(ClientInterface::class)->getMock();
     }
 
     public function testCreate()
     {
         $manager = new PolicyManager();
-        $this->assertAttributeInstanceOf('Psr\Log\NullLogger', 'logger', $manager);
+        $this->assertAttributeInstanceOf(NullLogger::class, 'logger', $manager);
 
         $manager->setLogger($this->logger);
         $manager->setClient($this->client);

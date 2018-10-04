@@ -2,7 +2,15 @@
 namespace Metfan\RabbitSetup\Tests\Manager\RabbitMq;
 
 use Metfan\RabbitSetup\Http\ClientInterface;
+use Metfan\RabbitSetup\Http\ClientPool;
+use Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager;
+use Metfan\RabbitSetup\Manager\RabbitMq\ParameterManager;
+use Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager;
+use Metfan\RabbitSetup\Manager\RabbitMq\QueueManager;
 use Metfan\RabbitSetup\Manager\RabbitMq\VhostManager;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 /**
  * Unit test of Metfan\RabbitSetup\Manager\RabbitMq\VhostManager
@@ -10,40 +18,40 @@ use Metfan\RabbitSetup\Manager\RabbitMq\VhostManager;
  * @author Ulrich
  * @package Metfan\RabbitSetup\Tests\Manager\RabbitMq
  */
-class VhostManagerTest extends \PHPUnit_Framework_TestCase
+class VhostManagerTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $parameterManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $exchangeManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $queueManager;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $clientPool;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $client;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var MockObject
      */
     private $policyManager;
 
@@ -51,13 +59,13 @@ class VhostManagerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->parameterManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\ParameterManager');
-        $this->exchangeManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\ExchangeManager');
-        $this->queueManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\QueueManager');
-        $this->clientPool = $this->getMockBuilder('Metfan\RabbitSetup\Http\ClientPool')->disableOriginalConstructor()->getMock();
-        $this->client = $this->getMock('Metfan\RabbitSetup\Http\ClientInterface');
-        $this->logger = $this->getMock('Psr\Log\LoggerInterface');
-        $this->policyManager = $this->getMock('Metfan\RabbitSetup\Manager\RabbitMq\PolicyManager');
+        $this->parameterManager = $this->getMockBuilder(ParameterManager::class)->getMock();
+        $this->exchangeManager = $this->getMockBuilder(ExchangeManager::class)->getMock();
+        $this->queueManager = $this->getMockBuilder(QueueManager::class)->getMock();
+        $this->clientPool = $this->getMockBuilder(ClientPool::class)->disableOriginalConstructor()->getMock();
+        $this->client = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)->getMock();
+        $this->policyManager = $this->getMockBuilder(PolicyManager::class)->getMock();
     }
 
     private function createVhost()
