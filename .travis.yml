@@ -1,6 +1,6 @@
 language: php
 
-php: [5.4, 5.5, 5.6, 7.0, hhvm]
+php: [7.0, 7.1, 7.2, 7.3]
 
 cache:
   directories:
@@ -9,12 +9,11 @@ cache:
 matrix:
   fast_finish: true
   include:
-    - php: 5.4
-    - php: 5.5
-    - php: 5.6
     - php: 7.0
+    - php: 7.1
+    - php: 7.2
   allow_failures:
-    - php: hhvm
+    - php: 7.3
 
 install:
   - composer self-update
